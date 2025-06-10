@@ -89,7 +89,7 @@ public class PetService {
                 .breed(dto.getBreed())
                 .ownerName(dto.getOwnerName())
                 .ownerContact(dto.getOwnerContact())
-                .vaccinationList(new ArrayList<>())  // ✅ Initialize the list
+                .vaccinationList(new ArrayList<>())
                 .build();
 
         dto.getVaccinationList().forEach(vdto -> {
