@@ -19,6 +19,7 @@ src/main/java
     ├── dto
     │   ├── PetRequestDTO.java
     │   └── PetResponseDTO.java
+    │   └── VaccinationDTO.java
     ├── repository
     │   ├── PetRepository.java
     │   └── VaccinationRepository.java
