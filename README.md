@@ -12,7 +12,8 @@ src/main/java
     ├── controller
     │   └── PetController.java
     ├── service
-    │   └── PetService.java
+    │   ├── PetService.java
+    │   └── PetServiceInterface.java
     ├── entity
     │   ├── Pet.java
     │   └── Vaccination.java
