@@ -30,17 +30,4 @@ public class PetRequestDTO {
     @NotNull(message = "Vaccination list cannot be null")
     private List<VaccinationDTO> vaccinationList;
 
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Builder
-    public static class VaccinationDTO {
-
-        @NotBlank(message = "Vaccine name is required")
-        private String vaccine_name;
-
-        @NotNull(message = "Vaccine date is required")
-        @PastOrPresent(message = "Vaccine date must be in the past or present")
-        private LocalDate vaccine_date;
-    }
 }

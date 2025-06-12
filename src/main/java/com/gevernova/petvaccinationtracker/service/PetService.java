@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class PetService {
+public class PetService implements PetServiceInterface {
 
     private final PetRepository petRepository;
 
@@ -49,7 +49,6 @@ public class PetService {
         pet.setOwnerName(dto.getOwnerName());
         pet.setOwnerContact(dto.getOwnerContact());
 
-        // Ensure the list is initialized before modifying it
         if (pet.getVaccinationList() == null) {
             pet.setVaccinationList(new ArrayList<>());
         } else {
