@@ -204,6 +204,78 @@ Before running the application, ensure the following tools are installed:
 
 ---
 
+
+### 📫 Email Integration with JMS-like Flow
+
+This application now includes **automatic email notifications** sent to the pet owner upon successful registration. The owner's email (`ownerEmail`) is captured via the `PetRequestDTO` and used to send a confirmation message.
+
+- The mailing functionality is handled by a custom class `EmailProducer.java` using Spring's `JavaMailSender`.
+- Email templates are sent in **HTML format** with basic styling.
+- Logging is implemented using `SLF4J` (`log.info`, `log.error`) for better observability.
+
+#### 📍 Example Log
+
+```java
+log.info("Email sent to {}", saved.getOwnerEmail());
+log.error("Failed to send email to {}", saved.getOwnerEmail(), e);
+```
+
+---
+
+### 🔁 DTO & Entity Mapping via `PetMapper.java`
+
+To maintain a clean separation between persistence and external API contracts, we use a dedicated `PetMapper.java` class.
+
+- Converts `PetRequestDTO` → `Pet` (Entity) including nested `Vaccination` objects.
+- Converts `Pet` → `PetResponseDTO`, ensuring no internal IDs or sensitive data are exposed in responses.
+- Handles bi-directional association setup for pet and vaccination data.
+
+```java
+// Mapping DTO to Entity
+Pet pet = Pet.builder()
+    .petName(dto.getPetName())
+    .ownerEmail(dto.getOwnerEmail())
+    ...
+    .build();
+```
+
+---
+
+### 📬 Sample Email Sent
+
+> **Subject**: `Vaccination Tracker - Pet Registered`  
+> **Body (HTML)**:
+```html
+<p>Dear Disha,</p>
+<p>Your pet <strong>Coco</strong> has been successfully registered in our vaccination tracker system.</p>
+```
+
+---
+
+### 📦 Dependencies Added
+
+Ensure the following is present in `pom.xml`:
+
+```xml
+<!-- JavaMailSender -->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-mail</artifactId>
+</dependency>
+```
+
+Also configure `application.properties` for email sending (SMTP):
+
+```properties
+spring.mail.host=smtp.gmail.com
+spring.mail.port=587
+spring.mail.username=your-email@gmail.com
+spring.mail.password=your-app-password
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true
+```
+
+
 #### 🚀 Steps to Run
 
 ```bash
