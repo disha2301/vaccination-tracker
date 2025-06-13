@@ -5,10 +5,13 @@ import com.gevernova.petvaccinationtracker.dto.PetResponseDTO;
 import com.gevernova.petvaccinationtracker.entity.Pet;
 import com.gevernova.petvaccinationtracker.entity.Vaccination;
 import com.gevernova.petvaccinationtracker.exceptionhandler.ResourceNotFoundException;
+import com.gevernova.petvaccinationtracker.jms.EmailProducer;
 import com.gevernova.petvaccinationtracker.mapper.PetMapper;
 import com.gevernova.petvaccinationtracker.repository.PetRepository;
+import jakarta.mail.MessagingException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,14 +20,29 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 @RequiredArgsConstructor
+@Slf4j
 public class PetService implements PetServiceInterface {
 
     private final PetRepository petRepository;
     private final PetMapper petMapper;
+    private final EmailProducer emailProducer;
 
     public PetResponseDTO createPet(PetRequestDTO dto) {
         Pet pet = petMapper.toEntity(dto);
         Pet saved = petRepository.save(pet);
+
+        if (saved.getOwnerEmail() != null && !saved.getOwnerEmail().isEmpty()) {
+            try {
+                emailProducer.sendEmail(
+                        saved.getOwnerEmail(),
+                        "Vaccination Tracker - Pet Registered",
+                        "Hi " + saved.getOwnerName() + ", your pet " + saved.getPetName() + " has been successfully registered."
+                );
+                log.info("Registration email sent to {}", saved.getOwnerEmail());
+            } catch (MessagingException e) {
+                log.error("Failed to send registration email to {}", saved.getOwnerEmail(), e);
+            }
+        }
         return petMapper.toDTO(saved);
     }
 

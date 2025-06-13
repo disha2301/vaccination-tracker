@@ -15,5 +15,6 @@ public class PetResponseDTO {
     private String breed;
     private String ownerName;
     private String ownerContact;
+    private String ownerEmail;
     private List<VaccinationDTO> vaccinationList;
 }

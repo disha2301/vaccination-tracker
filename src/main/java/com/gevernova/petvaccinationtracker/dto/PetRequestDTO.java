@@ -23,6 +23,10 @@ public class PetRequestDTO {
     @NotBlank(message = "Owner name is required")
     private String ownerName;
 
+    @NotBlank(message = "Owner email is required")
+    @Email(message = "Enter a valid email address")
+    private String ownerEmail;
+
     @NotBlank(message = "Owner contact is required")
     @Pattern(regexp = "\\+?\\d{10,15}", message = "Enter a valid phone number")
     private String ownerContact;

@@ -33,6 +33,9 @@ public class Pet {
     @Column(nullable = false)
     private String ownerContact;
 
+    @Column(nullable = false)
+    private String ownerEmail;
+
     @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Vaccination> vaccinationList = new ArrayList<>();
 

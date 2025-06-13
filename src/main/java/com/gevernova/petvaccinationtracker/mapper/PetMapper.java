@@ -23,6 +23,7 @@ public class PetMapper {
                 .breed(dto.getBreed())
                 .ownerName(dto.getOwnerName())
                 .ownerContact(dto.getOwnerContact())
+                .ownerEmail(dto.getOwnerEmail())
                 .vaccinationList(new ArrayList<>())
                 .build();
 
@@ -47,6 +48,7 @@ public class PetMapper {
                 .species(pet.getSpecies())
                 .breed(pet.getBreed())
                 .ownerName(pet.getOwnerName())
+                .ownerEmail(pet.getOwnerEmail())
                 .ownerContact(pet.getOwnerContact())
                 // Convert each Vaccination entity to its corresponding DTO
                 .vaccinationList(
