@@ -19,15 +19,20 @@ src/main/java
     │   └── Vaccination.java
     ├── dto
     │   ├── PetRequestDTO.java
-    │   └── PetResponseDTO.java
+    │   ├── PetResponseDTO.java
     │   └── VaccinationDTO.java
     ├── repository
     │   ├── PetRepository.java
     │   └── VaccinationRepository.java
+    ├── mapper
+    │   └── PetMapper.java
+    ├── jms
+    │   └── EmailProducer.java
     └── exceptionhandler
         ├── ResourceNotFoundException.java
         └── GlobalExceptionHandler.java
 ```
+
 ---
 
 ## 🧪 Tech Stack
