@@ -77,19 +77,21 @@ src/main/java
   "petName": "Coco",
   "species": "Cat",
   "breed": "Persian",
-  "ownerName": "Disha Yadav",
-  "ownerContact": "9876543210",
+  "ownerName": "Disha",
+  "ownerContact": "+919876543210",
+  "ownerEmail": "da5048@srmist.edu.in",
   "vaccinationList": [
     {
       "vaccine_name": "Rabies",
-      "vaccine_date": "2025-01-10"
+      "vaccine_date": "2025-06-01"
     },
     {
-      "vaccine_name": "Parvovirus",
-      "vaccine_date": "2025-02-15"
+      "vaccine_name": "Distemper",
+      "vaccine_date": "2025-06-10"
     }
   ]
 }
+
 ```
 ### 🛠️ DTO & Validation
 
